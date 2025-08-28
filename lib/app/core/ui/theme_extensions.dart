@@ -9,6 +9,6 @@ extension ThemeExtension on BuildContext {
   TextStyle get textStyle => TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
-        color: Colors.grey,
+        color: Colors.grey[300],
       );
 }
