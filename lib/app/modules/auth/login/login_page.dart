@@ -5,6 +5,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_provider/app/core/notifier/default_listener_notifier.dart';
+import 'package:todo_list_provider/app/core/ui/messages.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
 import 'package:todo_list_provider/app/core/widget/todo_list_field.dart';
 import 'package:todo_list_provider/app/core/widget/todo_list_logo.dart';
@@ -22,19 +23,32 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailEC = TextEditingController();
   final _passworEC = TextEditingController();
+  final _emailFocus = FocusNode();
+
+  late final DefaultListenerNotifier _listenerNotifier;
 
   @override
   void dispose() {
     super.dispose();
     _emailEC.dispose();
     _passworEC.dispose();
+    _listenerNotifier.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    DefaultListenerNotifier(changeNotifier: context.read<LoginController>()).listener(
+    _listenerNotifier = DefaultListenerNotifier(changeNotifier: context.read<LoginController>());
+    _listenerNotifier.listener(
       context: context,
+      everCallback: (notifier, listenerInstance) {
+        if (notifier is LoginController) {
+          if (notifier.hasInfo) {
+            Messages.of(context).showInfo(notifier.infoMessage!);
+            notifier.infoMessage = null;
+          }
+        }
+      },
       successCallback: (notifier, listenerInstance) {
         // listenerInstance.dispose();
         // Navigator.of(context).pushNamed('');
@@ -73,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             TodoListField(
                               label: 'E-mail',
+                              focusNode: _emailFocus,
                               controller: _emailEC,
                               validator: Validatorless.multiple([
                                 Validatorless.required('E-mail Obrigatório'),
@@ -98,7 +113,16 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_emailEC.text.isNotEmpty) {
+                                      context.read<LoginController>().forgotPassword(_emailEC.text);
+                                      // recuperar senha
+                                    } else {
+                                      _emailFocus.requestFocus();
+                                      Messages.of(context)
+                                          .showError('Digite um e-mail para recuperar a senha');
+                                    }
+                                  },
                                   child: Text(
                                     'Esqueceu a senha?',
                                   ),
