@@ -12,7 +12,20 @@
           "package_name": "enzo.crmsolucoes.todo_list_provider"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "221208651024-4ee97oqrgfmtpmquffd0cecagrumj78d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "enzo.crmsolucoes.todo_list_provider",
+            "certificate_hash": "d4c14bce35abfac3f2c9d1549bf4fa7f7eff3e3b"
+          }
+        },
+        {
+          "client_id": "221208651024-f4i0p4m9mn7qproi6mn7jk0a3hbqu6n9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAzclfeslxYWJiGJOkfj8WV6LbX3muYQng"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "221208651024-f4i0p4m9mn7qproi6mn7jk0a3hbqu6n9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "221208651024-rso74vv6t9hg4qlok9q1cg4tr253hqsm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "enzo.crmsolucoes.todoListProvider"
+              }
+            }
+          ]
         }
       }
     }
