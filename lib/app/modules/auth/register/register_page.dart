@@ -106,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.width * .5,
-            child: FittedBox(
+            child: const FittedBox(
               fit: BoxFit.fitHeight,
               child: TodoListLogo(),
             ),
@@ -127,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TodoListField(
@@ -141,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     obscureText: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TodoListField(
@@ -155,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     obscureText: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Align(
