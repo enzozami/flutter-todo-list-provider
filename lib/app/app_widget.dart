@@ -35,7 +35,7 @@ class _AppWidgetState extends State<AppWidget> {
       theme: TodoListUiConfig.theme,
       initialRoute: '/login',
       routes: {...AuthModule().routers},
-      home: SplashPage(),
+      home: const SplashPage(),
     );
   }
 }

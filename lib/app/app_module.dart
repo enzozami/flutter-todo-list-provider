@@ -27,7 +27,7 @@ class AppModule extends StatelessWidget {
           create: (context) => UserServiceImpl(userRepository: context.read()),
         ),
       ],
-      child: AppWidget(),
+      child: const AppWidget(),
     );
   }
 }

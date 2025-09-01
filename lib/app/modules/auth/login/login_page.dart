@@ -1,9 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 import 'package:todo_list_provider/app/core/notifier/default_listener_notifier.dart';
 import 'package:todo_list_provider/app/core/ui/messages.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
@@ -72,10 +71,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    TodoListLogo(),
+                    const TodoListLogo(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 40,
@@ -94,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Validatorless.email('E-mail Inválido'),
                               ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             TodoListField(
@@ -106,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                               ]),
                               obscureText: true,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Row(
@@ -123,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                                           .showError('Digite um e-mail para recuperar a senha');
                                     }
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Esqueceu a senha?',
                                   ),
                                 ),
@@ -157,13 +156,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color(0xffF0F3F7),
+                          color: const Color(0xffF0F3F7),
                           border: Border(
                             top: BorderSide(
                               width: 2,
@@ -173,11 +172,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             SignInButton(
-                              Buttons.Google,
+                              Buttons.google,
                               text: 'Continue com o Google',
                               padding: const EdgeInsets.all(5),
                               shape: OutlineInputBorder(
@@ -191,12 +190,12 @@ class _LoginPageState extends State<LoginPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Não tem conta?'),
+                                const Text('Não tem conta?'),
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pushNamed('/register');
                                   },
-                                  child: Text('Cadastre-se'),
+                                  child: const Text('Cadastre-se'),
                                 ),
                               ],
                             )

@@ -79,70 +79,41 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<User?> googleLogin() async {
+    List<String>? loginMethods;
     try {
       final googleSignIn = GoogleSignIn();
       final googleUser = await googleSignIn.signIn();
-
-      if (googleUser == null) {
-        // Usuário cancelou o login
-        return null;
-      }
-
-      final googleAuth = await googleUser.authentication;
-      final firebaseCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      try {
-        // Tenta criar usuário com e-mail do Google (senha aleatória)
-        await _firebaseAuth.createUserWithEmailAndPassword(
-          email: googleUser.email,
-          password: 'senha_aleatoria_todo_list',
-        );
-        // Se criar, faz login com credencial Google
-        final userCredential = await _firebaseAuth.signInWithCredential(firebaseCredential);
-        return userCredential.user;
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'email-already-in-use') {
-          try {
-            final userCredential = await _firebaseAuth.signInWithCredential(firebaseCredential);
-            return userCredential.user;
-          } on FirebaseAuthException catch (e2) {
-            if (e2.code == 'account-exists-with-different-credential') {
-              throw AuthException(
-                message:
-                    'Este e-mail já está cadastrado com outro método. Use o login tradicional ou vincule sua conta Google nas configurações.',
-              );
-            }
-            throw AuthException(message: e2.message ?? 'Erro ao realizar login com Google');
-          }
-        } else if (e.code == 'account-exists-with-different-credential') {
-          throw AuthException(
-            message:
-                'Este e-mail já está cadastrado com outro método. Use o login tradicional ou vincule sua conta Google nas configurações.',
-          );
+      if (googleUser != null) {
+        loginMethods = await _firebaseAuth.fetchSignInMethodsForEmail(googleUser.email);
+        if (loginMethods.contains('password')) {
+          throw AuthException(message: 'Você utilizou o e-mail para cadastro');
         } else {
-          throw AuthException(
-            message: e.message ?? 'Erro ao realizar login com Google',
-          );
+          final googleAuth = await googleUser.authentication;
+          final firebaseCredential = GoogleAuthProvider.credential(
+              accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+          var userCredential = await _firebaseAuth.signInWithCredential(firebaseCredential);
+          return userCredential.user;
         }
       }
     } on FirebaseAuthException catch (e, s) {
       log(e.toString());
       log(s.toString());
-      throw AuthException(message: 'Erro ao realizar login com Google');
-    } catch (e, s) {
-      log(e.toString());
-      log(s.toString());
-      throw AuthException(message: 'Erro inesperado ao realizar login com Google');
+      if (e.code == 'account-exists-with-different-credential') {
+        throw AuthException(
+            message:
+                'Login inválido, você se registrou no TodoList com os seguintes provedores: ${loginMethods?.join(',')}');
+      } else {
+        throw AuthException(message: 'Erro ao realizar login');
+      }
     }
+    return null;
   }
 
   @override
   Future<void> googleLogout() async {
-    await GoogleSignIn().signOut();
-    _firebaseAuth.signOut();
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+    await _firebaseAuth.signOut();
   }
 }
 
