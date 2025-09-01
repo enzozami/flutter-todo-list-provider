@@ -33,14 +33,14 @@ dependencies:
   provider: ^6.1.2
   sqflite: ^2.3.3+1
   path: ^1.9.0
-  nested: ^1.0.0
+  # nested: ^1.0.0
   google_fonts: ^6.2.1
-  sign_in_button: ^3.0.0
+  flutter_signin_button: ^2.1.1
   firebase_core: ^3.6.0
   firebase_auth: ^5.3.1
   validatorless: ^1.2.3
   flutter_overlay_loader: ^2.0.0
-  google_sign_in: ^6.2.1
+  google_sign_in: ^6.3.0
   date_picker_timeline: ^1.2.6
   intl: ^0.19.0
 

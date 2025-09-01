@@ -6,9 +6,12 @@ extension ThemeExtension on BuildContext {
   Color get buttonColor => Theme.of(this).colorScheme.primary;
   TextTheme get textTheme => Theme.of(this).textTheme;
 
-  TextStyle get textStyle => TextStyle(
+  TextStyle get customTextStyle => TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
         color: Colors.grey[300],
       );
+  // TextStyle? get titleSmall => textTheme.titleSmall;
+  // TextStyle? get titleMedium => textTheme.titleMedium;
+  // TextStyle? get titleLarge => textTheme.titleLarge;
 }

@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
-import 'package:sign_in_button/sign_in_button.dart';
 import 'package:todo_list_provider/app/core/notifier/default_listener_notifier.dart';
 import 'package:todo_list_provider/app/core/ui/messages.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
@@ -146,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
                                       'Login',
-                                      style: context.textStyle,
+                                      style: context.customTextStyle,
                                     ),
                                   ),
                                 ),
@@ -176,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 30,
                             ),
                             SignInButton(
-                              Buttons.google,
+                              Buttons.Google,
                               text: 'Continue com o Google',
                               padding: const EdgeInsets.all(5),
                               shape: OutlineInputBorder(

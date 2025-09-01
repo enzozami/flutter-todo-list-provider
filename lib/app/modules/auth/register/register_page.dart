@@ -179,7 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
                           'Cadastrar',
-                          style: context.textStyle,
+                          style: context.customTextStyle,
                         ),
                       ),
                     ),
