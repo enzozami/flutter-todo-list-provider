@@ -18,21 +18,23 @@ class HomeTasks extends StatelessWidget {
             'TASK\'S DE HOJE',
             style: context.titleStyle,
           ),
-          const Column(
-            children: [
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-              Task(),
-            ],
+          const Expanded(
+            child: Column(
+              children: [
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+                Task(),
+              ],
+            ),
           )
         ],
       ),

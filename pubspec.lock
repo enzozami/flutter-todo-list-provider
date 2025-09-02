@@ -93,10 +93,10 @@ packages:
     dependency: "direct main"
     description:
       name: date_picker_timeline
-      sha256: c05e6540fa3055c9036e6f99e758972e14be0e1010d5a6e7a1261d4a6f3292df
+      sha256: b99308cd224ca42900aa3ba2a75213c8deff6edee35fc18905a7834e8b0d7e70
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.6"
+    version: "1.2.7"
   fake_async:
     dependency: transitive
     description:
@@ -174,6 +174,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_overlay_loader:
     dependency: "direct main"
     description:
@@ -284,10 +289,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.20.2"
   leak_tracker:
     dependency: transitive
     description:
