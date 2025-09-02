@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                                     padding: const EdgeInsets.all(10.0),
                                     child: Text(
                                       'Login',
-                                      style: context.customTextStyle,
+                                      style: context.titleStyle,
                                     ),
                                   ),
                                 ),
