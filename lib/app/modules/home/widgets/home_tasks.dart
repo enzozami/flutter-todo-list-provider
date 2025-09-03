@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list_provider/app/core/ui/theme_extensions.dart';
+import 'package:todo_list_provider/app/models/task_filter_enum.dart';
+import 'package:todo_list_provider/app/models/task_model.dart';
+import 'package:todo_list_provider/app/modules/home/home_controller.dart';
 import 'package:todo_list_provider/app/modules/home/widgets/task.dart';
 
 class HomeTasks extends StatelessWidget {
@@ -14,18 +18,24 @@ class HomeTasks extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Text(
-            'TASK\'S DE HOJE',
-            style: context.titleStyle,
+          Selector<HomeController, String>(
+            selector: (context, controller) {
+              return controller.filterSelected.description;
+            },
+            builder: (context, value, child) {
+              return Text(
+                'TASK\'S $value',
+                style: context.titleStyle,
+              );
+            },
           ),
-          const Expanded(
-            child: Column(
-              children: [
-                Task(),
-                Task(),
-                Task(),
-              ],
-            ),
+          Column(
+            children: context
+                .select<HomeController, List<TaskModel>>((controller) => controller.filteredTasks)
+                .map((t) => Task(
+                      model: t,
+                    ))
+                .toList(),
           )
         ],
       ),
