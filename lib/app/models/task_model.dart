@@ -13,7 +13,7 @@ class TaskModel {
   factory TaskModel.loadFromDB(Map<String, dynamic> task) {
     return TaskModel(
       id: task['id'],
-      description: task['descrica'],
+      description: task['descricao'],
       dateTime: DateTime.parse(task['data_hora']),
       finished: task['finalizando'] == 1,
     );
