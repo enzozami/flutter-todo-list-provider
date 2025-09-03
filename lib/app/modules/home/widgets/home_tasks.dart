@@ -32,11 +32,27 @@ class HomeTasks extends StatelessWidget {
           Column(
             children: context
                 .select<HomeController, List<TaskModel>>((controller) => controller.filteredTasks)
-                .map((t) => Task(
-                      model: t,
+                .map((t) => Dismissible(
+                      key: ValueKey(t.id),
+                      background: Container(
+                        color: Colors.red,
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 16),
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      direction: DismissDirection.startToEnd,
+                      onDismissed: (direction) {
+                        context.read<HomeController>().deleteTask(t);
+                      },
+                      child: Task(
+                        model: t,
+                      ),
                     ))
                 .toList(),
-          )
+          ),
         ],
       ),
     );

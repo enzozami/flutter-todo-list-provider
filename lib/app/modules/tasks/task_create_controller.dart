@@ -36,4 +36,19 @@ class TaskCreateController extends DefaultChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> delete(int id) async {
+    try {
+      showLoadingAndResetState();
+      notifyListeners();
+      await _tasksService.delete(id);
+    } on Exception catch (e, s) {
+      log(e.toString());
+      log(s.toString());
+      setError('Erro ao deletar Task');
+    } finally {
+      hideLoading();
+      notifyListeners();
+    }
+  }
 }

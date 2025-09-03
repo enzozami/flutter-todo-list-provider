@@ -125,4 +125,9 @@ class HomeController extends DefaultChangeNotifier {
     showFinishingTasks = !showFinishingTasks;
     refreshPage();
   }
+
+  Future<void> deleteTask(TaskModel task) async {
+    await _tasksService.delete(task.id);
+    await loadTotalTasks(); // recarrega a lista
+  }
 }

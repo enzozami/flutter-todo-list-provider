@@ -65,4 +65,12 @@ class TasksServiceImpl implements TasksService {
 
   @override
   Future<void> checkOrUncheckTask(TaskModel task) => _tasksRepository.checkOrUncheckTask(task);
+
+  @override
+  Future<void> delete(int id) async {
+    final uid = _userService.uid;
+    if (uid == null) throw Exception("Usuário não autenticado");
+
+    await _tasksRepository.delete(id);
+  }
 }
