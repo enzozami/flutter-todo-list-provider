@@ -11,6 +11,7 @@ import 'package:todo_list_provider/app/repositories/user/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final FirebaseAuth _firebaseAuth;
+  String? _uid;
 
   UserRepositoryImpl({required FirebaseAuth firebaseAuth}) : _firebaseAuth = firebaseAuth;
 
@@ -41,6 +42,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       var userCredential =
           await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      _uid = FirebaseAuth.instance.currentUser!.uid;
       return userCredential.user;
     } on PlatformException catch (e, s) {
       log(e.toString());
@@ -94,6 +96,7 @@ class UserRepositoryImpl implements UserRepository {
           final firebaseCredential = GoogleAuthProvider.credential(
               accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
           var userCredential = await _firebaseAuth.signInWithCredential(firebaseCredential);
+          _uid = FirebaseAuth.instance.currentUser!.uid;
           return userCredential.user;
         }
       }
@@ -111,9 +114,12 @@ class UserRepositoryImpl implements UserRepository {
     return null;
   }
 
+  String? get uid => _uid;
+
   @override
   Future<void> logout() async {
     final googleSignIn = GoogleSignIn();
+    _uid = null;
     await googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }

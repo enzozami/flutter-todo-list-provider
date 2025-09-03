@@ -26,4 +26,11 @@ class UserServiceImpl implements UserService {
 
   @override
   Future<void> updateDisplayName(String name) => _userRepository.updateDisplayName(name);
+
+  @override
+  String get uid {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) throw Exception('Usuário não autenticado');
+    return user.uid;
+  }
 }

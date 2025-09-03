@@ -19,6 +19,7 @@ class TasksModule extends TodoListModule {
             Provider<TasksService>(
               create: (context) => TasksServiceImpl(
                 tasksRepository: context.read(),
+                userService: context.read(),
               ),
             ),
             ChangeNotifierProvider(

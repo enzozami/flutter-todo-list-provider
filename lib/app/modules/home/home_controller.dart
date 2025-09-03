@@ -4,8 +4,10 @@ import 'package:todo_list_provider/app/models/task_model.dart';
 import 'package:todo_list_provider/app/models/total_tasks_model.dart';
 import 'package:todo_list_provider/app/models/week_task_model.dart';
 import 'package:todo_list_provider/app/services/tasks/tasks_service.dart';
+import 'package:todo_list_provider/app/services/user/user_service.dart';
 
 class HomeController extends DefaultChangeNotifier {
+  final UserService _userService;
   final TasksService _tasksService;
   var filterSelected = TaskFilterEnum.today;
   TotalTasksModel? todayTotalTasks;
@@ -17,7 +19,11 @@ class HomeController extends DefaultChangeNotifier {
   DateTime? selectedDay;
   bool showFinishingTasks = false;
 
-  HomeController({required TasksService tasksService}) : _tasksService = tasksService;
+  HomeController({
+    required TasksService tasksService,
+    required UserService userService,
+  })  : _tasksService = tasksService,
+        _userService = userService;
 
   Future<void> loadTotalTasks() async {
     final allTasks = await Future.wait([
@@ -54,6 +60,10 @@ class HomeController extends DefaultChangeNotifier {
 
     switch (filter) {
       case TaskFilterEnum.today:
+        if (_userService.uid == null) {
+          setError('Usuário não autenticado');
+          return;
+        }
         tasks = await _tasksService.getToday();
         break;
       case TaskFilterEnum.tomorrow:
