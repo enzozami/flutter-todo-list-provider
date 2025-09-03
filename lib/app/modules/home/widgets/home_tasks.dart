@@ -46,6 +46,9 @@ class HomeTasks extends StatelessWidget {
                       direction: DismissDirection.startToEnd,
                       onDismissed: (direction) {
                         context.read<HomeController>().deleteTask(t);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('${t.description} removido!')),
+                        );
                       },
                       child: Task(
                         model: t,

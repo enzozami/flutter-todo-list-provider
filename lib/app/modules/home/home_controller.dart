@@ -127,7 +127,12 @@ class HomeController extends DefaultChangeNotifier {
   }
 
   Future<void> deleteTask(TaskModel task) async {
+    allTasks.removeWhere((t) => t.id == task.id);
+    filteredTasks.removeWhere((t) => t.id == task.id);
+    notifyListeners();
+
     await _tasksService.delete(task.id);
+
     await loadTotalTasks(); // recarrega a lista
   }
 }

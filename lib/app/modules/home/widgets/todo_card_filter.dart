@@ -21,6 +21,18 @@ class TodoCardFilter extends StatelessWidget {
       this.totalTasksModel,
       required this.selected});
 
+  int _getTaskFinish() {
+    final total = totalTasksModel?.totalTasks ?? 0;
+    final totalFinish = totalTasksModel?.totalTasksFinalizadas ?? 0;
+
+    if (total == 0) {
+      return 0;
+    }
+
+    final tasksToFinish = total - totalFinish;
+    return tasksToFinish;
+  }
+
   double _getPercentFinish() {
     final total = totalTasksModel?.totalTasks ?? 0;
     final totalFinish = totalTasksModel?.totalTasksFinalizadas ?? 0.1;
@@ -57,7 +69,7 @@ class TodoCardFilter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${totalTasksModel?.totalTasks} TASKS',
+              '${_getTaskFinish()} TASKS',
               style: context.titleStyle.copyWith(
                 fontSize: 10,
                 color: selected ? Colors.white : Colors.grey,
